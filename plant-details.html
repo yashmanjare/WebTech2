@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Plant Nursery</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="browse.html">Browse Plants</a>
+        </div>
+    </nav>
+
+    <!-- Plant Details Section -->
+    <section class="container">
+        <h2 id="plant-name">Plant Name</h2>
+        <div class="plant-details">
+            <img id="plant-image" src="" alt="Plant Image" class="plant-image">
+            <div class="plant-info">
+                <p id="plant-description">Plant description goes here.</p>
+                <p><strong>Price:</strong> $<span id="plant-price">0.00</span></p>
+                <button class="btn">Add to Cart</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- JavaScript for Dynamic Plant Data -->
+    <script>
+        // Object holding details of all plants displayed on index and browse page
+        const plantsData = {
+            'rose': { 
+                name: 'Rose', 
+                description: 'The rose is a classic and timeless flower, beloved for its beauty, fragrance, and symbolic meanings. Roses come in a variety of colors, each representing different emotions, such as red for love, white for purity, and yellow for friendship. They are perfect for gardens and bouquets, and they thrive in well-drained soil with good sunlight exposure.', 
+                image: 'Rose.jpg', 
+                price: 10.99 
+            },
+            'lavender': { 
+                name: 'Lavender', 
+                description: 'Lavender is known for its calming fragrance and vibrant purple flowers. It’s widely used in aromatherapy and skincare due to its relaxing properties. Lavender is easy to grow and thrives in well-drained soil with lots of sunlight. It’s often used to make essential oils, soaps, and as a natural remedy for sleep and relaxation.', 
+                image: 'Lavender.jpg', 
+                price: 12.99 
+            },
+            'aloe-vera': { 
+                name: 'Aloe Vera', 
+                description: 'Aloe Vera is a medicinal succulent plant famous for its healing properties. The gel from its leaves is often used in skincare for treating burns, cuts, and dry skin. Aloe Vera is easy to grow indoors or outdoors, requiring minimal water and care. It thrives in bright, indirect sunlight and well-drained soil.', 
+                image: 'images/aloe-vera.jpg', 
+                price: 7.99 
+            },
+            'snake-plant': { 
+                name: 'Snake Plant', 
+                description: 'The Snake Plant, also known as Mother-in-Law’s Tongue, is an ideal indoor plant for beginners due to its resilience and low-maintenance needs. It can survive in low light and irregular watering, making it perfect for any home or office. Additionally, it purifies the air by removing toxins, promoting a healthier living environment.', 
+                image: 'images/snake-plant.jpg', 
+                price: 9.99 
+            },
+            'fiddle-leaf': { 
+                name: 'Fiddle Leaf Fig', 
+                description: 'The Fiddle Leaf Fig is a stunning indoor plant known for its large, glossy, violin-shaped leaves. It’s a statement piece in any room and requires bright, indirect light to thrive. Though it needs regular watering and attention, the effort is rewarded with a beautiful, tall plant that adds a tropical touch to your home.', 
+                image: 'images/fiddle-leaf.jpg', 
+                price: 15.99 
+            },
+            'pothos': { 
+                name: 'Pothos', 
+                description: 'Pothos is a low-maintenance trailing plant that is perfect for hanging baskets or shelves. It grows well in various lighting conditions, from low to bright indirect light, and requires little care. Pothos plants are great for purifying the air, making them a popular choice for home and office spaces.', 
+                image: 'images/pothos.jpg', 
+                price: 8.99 
+            },
+            'philodendron': { 
+                name: 'Philodendron', 
+                description: 'Philodendrons are popular houseplants known for their ease of care and ability to adapt to various indoor conditions. With heart-shaped leaves and a trailing growth habit, they add a touch of greenery to any indoor space. They thrive in indirect light and require moderate watering.', 
+                image: 'images/philodendron.jpg', 
+                price: 11.99 
+            },
+            'jade-plant': { 
+                name: 'Jade Plant', 
+                description: 'The Jade Plant is a popular succulent that’s believed to bring good luck and prosperity. It features thick, fleshy leaves that store water, making it highly drought-resistant. Jade Plants are easy to care for and can live for many years, growing into a small tree-like structure. They prefer bright, indirect light and well-drained soil.', 
+                image: 'images/jade-plant.jpg', 
+                price: 14.50 
+            },
+            'money-plant': { 
+                name: 'Money Plant', 
+                description: 'The Money Plant is an easy-to-grow indoor plant that’s believed to bring good fortune, wealth, and prosperity. It is a popular choice for home décor, often displayed in pots or hung in planters. The Money Plant is highly adaptable and grows well in a variety of lighting conditions, including low light.', 
+                image: 'images/money-plant.jpg', 
+                price: 13.99 
+            },
+            'orchid': { 
+                name: 'Orchid', 
+                description: 'Orchids are delicate, exotic flowers that are prized for their beauty and variety. With over 25,000 species, orchids come in an array of colors and patterns. They require a bit of care, including indirect light, humidity, and well-drained soil, but their long-lasting flowers make them well worth the effort.', 
+                image: 'images/orchid.jpg', 
+                price: 18.50 
+            },
+            'fern': {
+                name: 'Fern',
+                description: 'Ferns are graceful, leafy plants that add a touch of lush greenery to any indoor or outdoor space. Known for their delicate, feathery fronds, ferns thrive in indirect sunlight and moist, well-drained soil. They are perfect for hanging baskets or as filler plants in shaded garden areas.',
+                image: 'images/fern.jpg',
+                price: 9.50
+            },
+            'cactus': {
+                name: 'Cactus',
+                description: 'Cacti are desert plants known for their ability to thrive in hot, dry environments. They are low-maintenance plants that come in a variety of shapes and sizes, and they require minimal watering. Cacti are perfect for people who want a unique, drought-tolerant plant for their home or garden.',
+                image: 'images/cactus.jpg',
+                price: 6.99
+            },
+            'bamboo': {
+                name: 'Lucky Bamboo',
+                description: 'Lucky Bamboo is a symbol of good fortune and prosperity in many cultures. It is easy to grow indoors, requiring only indirect light and clean water to thrive. Often grown in decorative containers, Lucky Bamboo is a popular choice for office desks or as a gift for special occasions.',
+                image: 'images/bamboo.jpg',
+                price: 12.99
+            },
+            'bonsai': {
+                name: 'Bonsai Tree',
+                description: 'Bonsai trees are miniature versions of full-sized trees, meticulously pruned and trained over the years. They are a symbol of harmony, patience, and artistic expression. Bonsai trees require regular care, including pruning and watering, but they are an elegant and rewarding addition to any space.',
+                image: 'images/bonsai.jpg',
+                price: 25.00
+            },
+            // New Plant Data
+            'tulip': {
+                name: 'Tulip',
+                description: 'Tulips are popular spring flowers known for their vibrant colors and elegant shape. They are easy to grow and come in many varieties, making them a favorite in gardens and floral arrangements. Tulips thrive in well-drained soil and full sunlight, and they are often associated with love and beauty.',
+                image: 'images/tulip.jpg',
+                price: 9.50
+            },
+            'daffodil': {
+                name: 'Daffodil',
+                description: 'Daffodils are cheerful yellow flowers that signal the arrival of spring. Known for their trumpet-like shape and bright color, they are hardy and easy to grow in a variety of soils. Daffodils prefer well-drained soil and can naturalize, coming back year after year.',
+                image: 'images/daffodil.jpg',
+                price: 8.00
+            },
+            'lily': {
+                name: 'Lily',
+                description: 'Lilies are elegant flowers with large blooms and a sweet fragrance. They come in various colors and types, making them a popular choice for gardens and floral arrangements. Lilies prefer well-drained soil and full sun to partial shade, and they symbolize purity and refined beauty.',
+                image: 'images/lily.jpg',
+                price: 15.00
+            },
+            'sunflower': {
+                name: 'Sunflower',
+                description: 'Sunflowers are iconic summer flowers known for their large, bright yellow petals and tall stalks. They are easy to grow and thrive in sunny areas. Sunflowers can grow quite tall and are often associated with happiness and warmth, making them a cheerful addition to any garden.',
+                image: 'images/sunflower.jpg',
+                price: 5.99
+            },
+            'jasmine': {
+                name: 'Jasmine',
+                description: 'Jasmine is a fragrant flowering plant often used in perfumes and teas. Known for its delicate white or yellow flowers, jasmine is a climber that requires support as it grows. It thrives in well-drained soil and enjoys full sun to partial shade, making it a lovely addition to gardens and patios.',
+                image: 'images/jasmine.jpg',
+                price: 7.99
+            },
+            'daisy': {
+                name: 'Daisy',
+                description: 'Daisies are cheerful flowers known for their simple beauty and bright yellow centers. They are hardy and easy to grow, making them a popular choice for gardens and wildflower arrangements. Daisies thrive in full sunlight and well-drained soil and symbolize innocence and purity.',
+                image: 'images/daisy.jpg',
+                price: 6.50
+            },
+            'chrysanthemum': {
+                name: 'Chrysanthemum',
+                description: 'Chrysanthemums, or mums, are popular fall flowers known for their vibrant colors and long-lasting blooms. They come in various shapes and sizes and are often used in floral arrangements. Mums prefer well-drained soil and full sunlight, and they symbolize loyalty and love.',
+                image: 'images/chrysanthemum.jpg',
+                price: 10.50
+            },
+            'echeveria': {
+                name: 'Echeveria',
+                description: 'Echeveria is a popular succulent known for its rosette shape and colorful foliage. These hardy plants are drought-tolerant and require minimal care, making them ideal for indoor gardens or as decorative pieces. Echeverias thrive in well-drained soil and enjoy bright, indirect sunlight.',
+                image: 'images/echeveria.jpg',
+                price: 12.00
+            },
+            'zebra': {
+                name: 'Zebra Plant',
+                description: 'Zebra Plant, or Haworthia, is a succulent known for its distinctive striped leaves resembling a zebra pattern. This low-maintenance plant thrives in bright, indirect light and well-drained soil. It’s perfect for indoor settings and adds an interesting visual element to your plant collection.',
+                image: 'images/zebra.jpg',
+                price: 8.50
+            },
+            'panda': {
+                name: 'Panda Plant',
+                description: 'Panda Plant is a charming succulent with fuzzy, velvety leaves that resemble panda ears. This low-maintenance plant thrives in bright, indirect light and requires minimal watering, making it an excellent choice for beginners. Its unique appearance adds character to any plant collection.',
+                image: 'images/panda.jpg',
+                price: 9.00
+            },
+            'string-of-pearls': {
+                name: 'String of Pearls',
+                description: 'String of Pearls is a unique succulent known for its trailing strands of round, bead-like leaves. It’s a perfect choice for hanging baskets or shelves, adding a touch of whimsy to your decor. This low-maintenance plant thrives in bright, indirect light and requires minimal watering.',
+                image: 'images/string-of-pearls.jpg',
+                price: 15.00
+            },
+            'sedum': {
+                name: 'Sedum',
+                description: 'Sedum, or stonecrop, is a hardy succulent that comes in various shapes and colors. They are drought-tolerant and thrive in poor soil conditions, making them perfect for rock gardens or ground cover. Sedums require full sunlight and minimal watering, making them low-maintenance plants.',
+                image: 'images/sedum.jpg',
+                price: 7.00
+            },
+            'agave': {
+                name: 'Agave',
+                description: 'Agave is a striking succulent known for its rosette shape and sharp, pointed leaves. These drought-resistant plants thrive in full sun and require minimal care. Agaves are often used in landscaping and add a bold touch to any garden or indoor space.',
+                image: 'images/agave.jpg',
+                price: 18.00
+            },
+            'basil': {
+                name: 'Basil',
+                description: 'Basil is a popular culinary herb known for its aromatic leaves used in cooking. It thrives in warm weather and full sunlight, making it a great addition to gardens or pots on patios. Basil requires regular watering and well-drained soil to grow lush and flavorful.',
+                image: 'images/basil.jpg',
+                price: 4.50
+            },
+            'mint': {
+                name: 'Mint',
+                description: 'Mint is a fragrant herb known for its refreshing aroma and flavor. It grows rapidly and can spread quickly, making it ideal for container gardening. Mint prefers partial shade and moist, well-drained soil. It’s a versatile herb used in teas, cocktails, and culinary dishes.',
+                image: 'images/mint.jpg',
+                price: 3.00
+            },
+            'cilantro': {
+                name: 'Cilantro',
+                description: 'Cilantro, also known as coriander, is an aromatic herb commonly used in various cuisines. It grows well in well-drained soil and requires full sunlight. Cilantro is often harvested for its leaves and seeds, making it a versatile addition to any garden or herb collection.',
+                image: 'images/cilantro.jpg',
+                price: 3.50
+            },
+            'thyme': {
+                name: 'Thyme',
+                description: 'Thyme is a low-growing herb with tiny, fragrant leaves often used in cooking. It thrives in full sunlight and well-drained soil, making it perfect for gardens and containers. Thyme is drought-resistant and can enhance the flavor of various dishes, making it a popular culinary herb.',
+                image: 'images/thyme.jpg',
+                price: 4.00
+            },
+            'rosemary': {
+                name: 'Rosemary',
+                description: 'Rosemary is a fragrant herb known for its needle-like leaves and distinct flavor. It thrives in full sunlight and well-drained soil, making it an excellent choice for gardens and pots. Rosemary is often used in cooking and has a long history of culinary and medicinal uses.',
+                image: 'images/rosemary.jpg',
+                price: 5.00
+            },
+            'oregano': {
+                name: 'Oregano',
+                description: 'Oregano is a perennial herb known for its robust flavor, commonly used in Italian and Mediterranean cuisine. It thrives in full sunlight and well-drained soil, making it easy to grow in gardens or pots. Oregano can be harvested for fresh leaves or dried for seasoning.',
+                image: 'images/oregano.jpg',
+                price: 4.50
+            },
+            'sage': {
+                name: 'Sage',
+                description: 'Sage is a culinary herb known for its earthy flavor and aromatic leaves. It prefers full sunlight and well-drained soil, making it suitable for gardens and containers. Sage is often used in cooking and has a long history of medicinal uses, making it a valuable addition to any herb garden.',
+                image: 'images/sage.jpg',
+                price: 5.50
+            },
+            'chives': {
+                name: 'Chives',
+                description: 'Chives are a flavorful herb known for their slender green leaves and mild onion flavor. They grow well in full sunlight and can be harvested regularly for culinary use. Chives are perfect for containers or garden beds, adding both flavor and a decorative touch to any space.',
+                image: 'images/chives.jpg',
+                price: 3.00
+            },
+            'lemongrass': {
+                name: 'Lemongrass',
+                description: 'Lemongrass is a tropical herb known for its citrusy flavor and aroma. It thrives in warm, sunny conditions and is often used in Asian cuisine. Lemongrass can be grown in pots or gardens and requires regular watering to keep its soil moist.',
+                image: 'images/lemongrass.jpg',
+                price: 6.00
+            },
+            'parsley': {
+                name: 'Parsley',
+                description: 'Parsley is a versatile herb used in various cuisines for its fresh flavor and bright green leaves. It thrives in well-drained soil and can grow in full sunlight or partial shade. Parsley can be harvested regularly for culinary use and is a common garnish in many dishes.',
+                image: 'images/parsley.jpg',
+                price: 3.50
+            }
+        };
+
+        // Function to load plant data
+        function loadPlantData(plantName) {
+            const plant = plantsData[plantName];
+            if (plant) {
+                document.getElementById('plant-name').innerText = plant.name;
+                document.getElementById('plant-description').innerText = plant.description;
+                document.getElementById('plant-image').src = plant.image;
+                document.getElementById('plant-price').innerText = `$${plant.price.toFixed(2)}`;
+            }
+        }
+
+        // Load default plant data (example)
+        loadPlantData('rose');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Plants</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">Plant Nursery</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+        </div>
+    </nav>
+
+    <!-- Browse Section -->
+    <section class="container">
+        <h2 id="browse-title">Browse Plants</h2>
+        <div id="browse-grid" class="plant-grid"></div>
+    </section>
+
+    <!-- JavaScript for Dynamic Plant Data -->
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const category = params.get('category');
+
+        const plantsData = {
+            'flowers': [
+                { name: 'Rose', description: 'Beautiful red rose.', image: 'Rose.jpg' },
+                { name: 'Tulip', description: 'Elegant and colorful tulips.', image: 'Tulip.jpg' },
+                { name: 'Daffodil', description: 'Bright yellow daffodils.', image: 'Daffodil.jpg' },
+                { name: 'Lily', description: 'Pure white lilies.', image: 'Lily.jpg' },
+                { name: 'Sunflower', description: 'Large and radiant sunflowers.', image: 'Sunflower.jpg' },
+                { name: 'Orchid', description: 'Exotic orchid flowers.', image: 'Orchid.jpg' },
+                { name: 'Jasmine', description: 'Fragrant jasmine flowers.', image: 'Jasmine.jpg' },
+                { name: 'Daisy', description: 'White and yellow daisies.', image: 'Daisy.jpg' },
+                { name: 'Chrysanthemum', description: 'Colorful chrysanthemums.', image: 'Chrysanthemum.jpg' },
+                { name: 'Lavender', description: 'Calming lavender flowers.', image: 'Lavender.jpg' }
+            ],
+            'succulents': [
+                { name: 'Aloe Vera', description: 'Healing aloe vera.', image: "Aloe Vera.jpg" },
+                { name: 'Cactus', description: 'A spiky but beautiful succulent.', image: 'Cactus.jpg' },
+                { name: 'Echeveria', description: 'Rosette-shaped echeveria.', image: 'Echeveria.jpg' },
+                { name: 'Jade Plant', description: 'Feng Shui friendly jade plant.', image: 'Jade Plant.jpg' },
+                { name: 'Zebra Plant', description: 'Striped zebra succulent.', image: 'Zebra Plant.jpg' },
+                { name: 'Panda Plant', description: 'Soft, furry leaves of the panda plant.', image: 'Panda Plant.jpg' },
+                { name: 'String of Pearls', description: 'Unique succulent with pearl-like beads.', image: 'String of Pearls.jpg' },
+                { name: 'Snake Plant', description: 'Easy to care snake plant.', image: 'Snake Plant.jpg' },
+                { name: 'Sedum', description: 'Vibrant sedum succulent.', image: 'Sedum.jpg' },
+                { name: 'Agave', description: 'Large, striking agave plant.', image: 'Agave.jpg' }
+            ],
+            'herbs': [
+                { name: 'Basil', description: 'Perfect for Italian dishes.', image: 'Basil.jpg' },
+                { name: 'Mint', description: 'Fresh mint for your drinks and meals.', image: 'Mint.jpg' },
+                { name: 'Cilantro', description: 'Cilantro for vibrant flavors.', image: 'Cilantro.jpg' },
+                { name: 'Thyme', description: 'Aromatic thyme.', image: 'Thyme.jpg' },
+                { name: 'Rosemary', description: 'Fragrant rosemary sprigs.', image: 'Rosemary.jpg' },
+                { name: 'Oregano', description: 'Mediterranean oregano herb.', image: 'Oregano.jpg' },
+                { name: 'Sage', description: 'Sage for culinary and medicinal use.', image: 'Sage.jpg' },
+                { name: 'Chives', description: 'Mild onion flavor chives.', image: 'Chives.jpg' },
+                { name: 'Lemongrass', description: 'Lemongrass for teas and soups.', image: 'Lemongrass.jpg' },
+                { name: 'Parsley', description: 'Fresh parsley leaves.', image: 'Parsley.jpg' }
+            ]
+        };
+
+        document.getElementById('browse-title').textContent = `Browse ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+
+        const plantGrid = document.getElementById('browse-grid');
+        plantsData[category].forEach(plant => {
+            const plantCard = `
+                <div class="plant-card">
+                    <img src="${plant.image}" alt="${plant.name}">
+                    <h3>${plant.name}</h3>
+                    <p>${plant.description}</p>
+                    <a href="plant-details.html?plant=${plant.name.toLowerCase().replace(' ', '-')}" class="btn">View Details</a>
+                </div>
+            `;
+            plantGrid.innerHTML += plantCard;
+        });
+    </script>
+
+</body>
+</html>
