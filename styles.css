@@ -11,6 +11,11 @@ a {
     color: inherit;
 }
 
+.container {
+    width: 80%;
+    margin: auto;
+}
+
 /* Navbar */
 .navbar {
     display: flex;
@@ -19,22 +24,24 @@ a {
     background-color: #4CAF50;
     color: white;
     padding: 15px;
+    flex-wrap: wrap; /* For mobile responsiveness */
+    text-align: center;
 }
 
 .navbar .logo {
-    font-size: 1.5em;
-}
-
-.logo {
-    display: flex;
-    align-items: center; /* Vertically centers the logo and text */
+    font-size: 1.5rem;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    display: flex;
+    align-items: center;
 }
 
 .logo img {
     margin-right: 10px; /* Space between logo and text */
 }
 
+.nav-links {
+    margin-top: 10px;
+}
 
 .nav-links a {
     margin: 0 15px;
@@ -46,110 +53,76 @@ a {
     text-decoration: underline;
 }
 
+/* Hero Section */
 .hero {
     position: relative;
-    width: 100%; /* Full width of the container */
-    height: 400px; /* Fixed height for the hero section */
-    overflow: hidden; /* Ensures the image does not overflow */
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
 }
 
 .hero-image {
-    width: 100%; /* Full width of the hero section */
-    height: 100%; /* Full height of the hero section */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .hero-text {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin-top: 50px;
     transform: translate(-50%, -50%);
     color: white;
     text-align: center;
 }
 
 .hero-text h1 {
-    font-size: 3em; /* Adjust size as needed */
+    font-size: 3em;
     margin: 0;
 }
 
 .hero-text p {
-    font-size: 1.5em; /* Adjust size as needed */
+    font-size: 1.5em;
 }
 
-
-
-
-
-/* Section */
-.container {
-    padding: 20px;
-}
-
+/* Section Title */
 .section-title {
     text-align: center;
     font-size: 2em;
     margin-bottom: 20px;
 }
 
-/* Categories Section */
-.category-grid {
+/* Grid Section for Categories and Plants */
+.category-grid, .plant-grid {
     display: flex;
+    gap: 2rem;
     justify-content: space-around;
     flex-wrap: wrap;
 }
 
-.category-card {
+.category-card, .plant-card {
     width: 30%;
     text-align: center;
     margin-bottom: 20px;
 }
 
-.category-card img {
+.category-card img, .plant-card img {
     width: 100%;
+    height: auto;
+    object-fit: cover;
     border-radius: 5px;
 }
 
-.category-card .btn {
+.category-card .btn, .plant-card .btn {
     background-color: #4CAF50;
     color: white;
     padding: 10px 20px;
     border-radius: 5px;
     text-decoration: none;
+    transition: background-color 0.3s;
 }
 
-.category-card .btn:hover {
-    background-color: #45a049;
-}
-
-/* Plant Sections */
-.plant-grid {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.plant-card {
-    width: 30%;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.plant-card img {
-    width: 100%;
-    border-radius: 5px;
-}
-
-.plant-card .btn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
-    text-decoration: none;
-}
-
-.plant-card .btn:hover {
+.category-card .btn:hover, .plant-card .btn:hover {
     background-color: #45a049;
 }
 
@@ -163,91 +136,14 @@ a {
 
 .promo-banner .btn {
     background-color: #45a049;
-    color: white;
     padding: 10px 20px;
-    border-radius: 5px;
+    color: white;
     text-decoration: none;
+    border-radius: 5px;
 }
 
 .promo-banner .btn:hover {
     background-color: #36a03d;
-}
-
-
-
-
-
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-.container {
-    width: 80%;
-    margin: auto;
-}
-
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-}
-
-.navbar .logo {
-    color: white;
-    font-size: 1.5rem;
-}
-
-.navbar .nav-links a {
-    color: white;
-    margin-left: 1rem;
-    text-decoration: none;
-}
-
-/* Hero Section */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    overflow: hidden;
-}
-
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: white;
-    text-align: center;
-    padding: 1rem;
-}
-
-/* Category Grid */
-.category-grid, .plant-grid {
-    display: flex;
-    gap: 2rem;
-    justify-content: space-around;
-    flex-wrap: wrap;
-}
-
-.category-card, .plant-card {
-    text-align: center;
-    width: 30%;
-}
-
-.category-card img, .plant-card img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
 }
 
 /* Footer */
@@ -298,7 +194,7 @@ body {
 /* For mobile devices (up to 767px) */
 @media (max-width: 767px) {
     .category-card, .plant-card {
-        width: 100%; /* Full width for mobile screens */
+        width: 100%;
         margin-bottom: 20px;
     }
 
@@ -316,7 +212,6 @@ body {
 
     .navbar {
         flex-direction: column;
-        text-align: center;
     }
 
     .nav-links {
